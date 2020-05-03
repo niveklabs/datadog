@@ -567,6 +567,16 @@ module "datadog_dashboard" {
             scale        = null
           }]
         }]
+        service_level_objective_definition = [{
+          show_error_budget = null
+          slo_id            = null
+          time_windows      = []
+          title             = null
+          title_align       = null
+          title_size        = null
+          view_mode         = null
+          view_type         = null
+        }]
         timeseries_definition = [{
           event = [{
             q = null
@@ -988,6 +998,16 @@ module "datadog_dashboard" {
         min          = null
         scale        = null
       }]
+    }]
+    service_level_objective_definition = [{
+      show_error_budget = null
+      slo_id            = null
+      time_windows      = []
+      title             = null
+      title_align       = null
+      title_size        = null
+      view_mode         = null
+      view_type         = null
     }]
     timeseries_definition = [{
       event = [{

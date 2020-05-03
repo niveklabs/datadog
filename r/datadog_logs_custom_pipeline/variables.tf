@@ -67,6 +67,14 @@ variable "processor" {
           sources    = list(string)
         }
       ))
+      geo_ip_parser = list(object(
+        {
+          is_enabled = bool
+          name       = string
+          sources    = list(string)
+          target     = string
+        }
+      ))
       grok_parser = list(object(
         {
           grok = list(object(
@@ -77,6 +85,7 @@ variable "processor" {
           ))
           is_enabled = bool
           name       = string
+          samples    = list(string)
           source     = string
         }
       ))
@@ -143,6 +152,14 @@ variable "processor" {
                   sources    = list(string)
                 }
               ))
+              geo_ip_parser = list(object(
+                {
+                  is_enabled = bool
+                  name       = string
+                  sources    = list(string)
+                  target     = string
+                }
+              ))
               grok_parser = list(object(
                 {
                   grok = list(object(
@@ -153,6 +170,7 @@ variable "processor" {
                   ))
                   is_enabled = bool
                   name       = string
+                  samples    = list(string)
                   source     = string
                 }
               ))
@@ -175,6 +193,15 @@ variable "processor" {
                   is_enabled = bool
                   name       = string
                   sources    = list(string)
+                }
+              ))
+              string_builder_processor = list(object(
+                {
+                  is_enabled         = bool
+                  is_replace_missing = bool
+                  name               = string
+                  target             = string
+                  template           = string
                 }
               ))
               trace_id_remapper = list(object(
@@ -218,6 +245,15 @@ variable "processor" {
           is_enabled = bool
           name       = string
           sources    = list(string)
+        }
+      ))
+      string_builder_processor = list(object(
+        {
+          is_enabled         = bool
+          is_replace_missing = bool
+          name               = string
+          target             = string
+          template           = string
         }
       ))
       trace_id_remapper = list(object(

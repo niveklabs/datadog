@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    datadog = ">= 2.5.0"
+    datadog = ">= 2.6.0"
   }
 }
 
@@ -1004,6 +1004,20 @@ resource "datadog_dashboard" "this" {
                 }
               }
 
+              dynamic "service_level_objective_definition" {
+                for_each = widget.value.service_level_objective_definition
+                content {
+                  show_error_budget = service_level_objective_definition.value["show_error_budget"]
+                  slo_id            = service_level_objective_definition.value["slo_id"]
+                  time_windows      = service_level_objective_definition.value["time_windows"]
+                  title             = service_level_objective_definition.value["title"]
+                  title_align       = service_level_objective_definition.value["title_align"]
+                  title_size        = service_level_objective_definition.value["title_size"]
+                  view_mode         = service_level_objective_definition.value["view_mode"]
+                  view_type         = service_level_objective_definition.value["view_type"]
+                }
+              }
+
               dynamic "timeseries_definition" {
                 for_each = widget.value.timeseries_definition
                 content {
@@ -1758,6 +1772,20 @@ resource "datadog_dashboard" "this" {
             }
           }
 
+        }
+      }
+
+      dynamic "service_level_objective_definition" {
+        for_each = widget.value.service_level_objective_definition
+        content {
+          show_error_budget = service_level_objective_definition.value["show_error_budget"]
+          slo_id            = service_level_objective_definition.value["slo_id"]
+          time_windows      = service_level_objective_definition.value["time_windows"]
+          title             = service_level_objective_definition.value["title"]
+          title_align       = service_level_objective_definition.value["title_align"]
+          title_size        = service_level_objective_definition.value["title_size"]
+          view_mode         = service_level_objective_definition.value["view_mode"]
+          view_type         = service_level_objective_definition.value["view_type"]
         }
       }
 

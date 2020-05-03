@@ -42,6 +42,12 @@ module "datadog_logs_custom_pipeline" {
       name       = null
       sources    = []
     }]
+    geo_ip_parser = [{
+      is_enabled = null
+      name       = null
+      sources    = []
+      target     = null
+    }]
     grok_parser = [{
       grok = [{
         match_rules   = null
@@ -49,6 +55,7 @@ module "datadog_logs_custom_pipeline" {
       }]
       is_enabled = null
       name       = null
+      samples    = []
       source     = null
     }]
     message_remapper = [{
@@ -96,6 +103,12 @@ module "datadog_logs_custom_pipeline" {
           name       = null
           sources    = []
         }]
+        geo_ip_parser = [{
+          is_enabled = null
+          name       = null
+          sources    = []
+          target     = null
+        }]
         grok_parser = [{
           grok = [{
             match_rules   = null
@@ -103,6 +116,7 @@ module "datadog_logs_custom_pipeline" {
           }]
           is_enabled = null
           name       = null
+          samples    = []
           source     = null
         }]
         message_remapper = [{
@@ -119,6 +133,13 @@ module "datadog_logs_custom_pipeline" {
           is_enabled = null
           name       = null
           sources    = []
+        }]
+        string_builder_processor = [{
+          is_enabled         = null
+          is_replace_missing = null
+          name               = null
+          target             = null
+          template           = null
         }]
         trace_id_remapper = [{
           is_enabled = null
@@ -150,6 +171,13 @@ module "datadog_logs_custom_pipeline" {
       is_enabled = null
       name       = null
       sources    = []
+    }]
+    string_builder_processor = [{
+      is_enabled         = null
+      is_replace_missing = null
+      name               = null
+      target             = null
+      template           = null
     }]
     trace_id_remapper = [{
       is_enabled = null

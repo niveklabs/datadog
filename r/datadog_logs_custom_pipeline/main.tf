@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    datadog = ">= 2.5.0"
+    datadog = ">= 2.6.0"
   }
 }
 
@@ -78,11 +78,22 @@ resource "datadog_logs_custom_pipeline" "this" {
         }
       }
 
+      dynamic "geo_ip_parser" {
+        for_each = processor.value.geo_ip_parser
+        content {
+          is_enabled = geo_ip_parser.value["is_enabled"]
+          name       = geo_ip_parser.value["name"]
+          sources    = geo_ip_parser.value["sources"]
+          target     = geo_ip_parser.value["target"]
+        }
+      }
+
       dynamic "grok_parser" {
         for_each = processor.value.grok_parser
         content {
           is_enabled = grok_parser.value["is_enabled"]
           name       = grok_parser.value["name"]
+          samples    = grok_parser.value["samples"]
           source     = grok_parser.value["source"]
 
           dynamic "grok" {
@@ -181,11 +192,22 @@ resource "datadog_logs_custom_pipeline" "this" {
                 }
               }
 
+              dynamic "geo_ip_parser" {
+                for_each = processor.value.geo_ip_parser
+                content {
+                  is_enabled = geo_ip_parser.value["is_enabled"]
+                  name       = geo_ip_parser.value["name"]
+                  sources    = geo_ip_parser.value["sources"]
+                  target     = geo_ip_parser.value["target"]
+                }
+              }
+
               dynamic "grok_parser" {
                 for_each = processor.value.grok_parser
                 content {
                   is_enabled = grok_parser.value["is_enabled"]
                   name       = grok_parser.value["name"]
+                  samples    = grok_parser.value["samples"]
                   source     = grok_parser.value["source"]
 
                   dynamic "grok" {
@@ -223,6 +245,17 @@ resource "datadog_logs_custom_pipeline" "this" {
                   is_enabled = status_remapper.value["is_enabled"]
                   name       = status_remapper.value["name"]
                   sources    = status_remapper.value["sources"]
+                }
+              }
+
+              dynamic "string_builder_processor" {
+                for_each = processor.value.string_builder_processor
+                content {
+                  is_enabled         = string_builder_processor.value["is_enabled"]
+                  is_replace_missing = string_builder_processor.value["is_replace_missing"]
+                  name               = string_builder_processor.value["name"]
+                  target             = string_builder_processor.value["target"]
+                  template           = string_builder_processor.value["template"]
                 }
               }
 
@@ -278,6 +311,17 @@ resource "datadog_logs_custom_pipeline" "this" {
           is_enabled = status_remapper.value["is_enabled"]
           name       = status_remapper.value["name"]
           sources    = status_remapper.value["sources"]
+        }
+      }
+
+      dynamic "string_builder_processor" {
+        for_each = processor.value.string_builder_processor
+        content {
+          is_enabled         = string_builder_processor.value["is_enabled"]
+          is_replace_missing = string_builder_processor.value["is_replace_missing"]
+          name               = string_builder_processor.value["name"]
+          target             = string_builder_processor.value["target"]
+          template           = string_builder_processor.value["template"]
         }
       }
 

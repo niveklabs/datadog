@@ -17,7 +17,7 @@ variable "monitor_ids" {
 }
 
 variable "monitor_search" {
-  description = "(optional) - A dynamic search on creation for the SLO"
+  description = "(optional)"
   type        = string
   default     = null
 }

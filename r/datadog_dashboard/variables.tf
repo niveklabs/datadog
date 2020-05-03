@@ -787,6 +787,18 @@ variable "widget" {
                   ))
                 }
               ))
+              service_level_objective_definition = list(object(
+                {
+                  show_error_budget = bool
+                  slo_id            = string
+                  time_windows      = list(string)
+                  title             = string
+                  title_align       = string
+                  title_size        = string
+                  view_mode         = string
+                  view_type         = string
+                }
+              ))
               timeseries_definition = list(object(
                 {
                   event = list(object(
@@ -1359,6 +1371,18 @@ variable "widget" {
               scale        = string
             }
           ))
+        }
+      ))
+      service_level_objective_definition = list(object(
+        {
+          show_error_budget = bool
+          slo_id            = string
+          time_windows      = list(string)
+          title             = string
+          title_align       = string
+          title_size        = string
+          view_mode         = string
+          view_type         = string
         }
       ))
       timeseries_definition = list(object(

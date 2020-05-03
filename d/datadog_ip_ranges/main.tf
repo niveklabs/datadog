@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    datadog = ">= 2.5.0"
+    datadog = ">= 2.6.0"
   }
 }
 
