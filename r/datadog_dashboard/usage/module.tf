@@ -13,6 +13,14 @@ module "datadog_dashboard" {
     prefix  = null
   }]
 
+  template_variable_preset = [{
+    name = null
+    template_variable = [{
+      name  = null
+      value = null
+    }]
+  }]
+
   widget = [{
     alert_graph_definition = [{
       alert_id    = null
@@ -414,16 +422,18 @@ module "datadog_dashboard" {
           title_size  = null
         }]
         manage_status_definition = [{
-          color_preference = null
-          count            = null
-          display_format   = null
-          hide_zero_counts = null
-          query            = null
-          sort             = null
-          start            = null
-          title            = null
-          title_align      = null
-          title_size       = null
+          color_preference    = null
+          count               = null
+          display_format      = null
+          hide_zero_counts    = null
+          query               = null
+          show_last_triggered = null
+          sort                = null
+          start               = null
+          summary_type        = null
+          title               = null
+          title_align         = null
+          title_size          = null
         }]
         note_definition = [{
           background_color = null
@@ -433,6 +443,55 @@ module "datadog_dashboard" {
           text_align       = null
           tick_edge        = null
           tick_pos         = null
+        }]
+        query_table_definition = [{
+          request = [{
+            aggregator = null
+            alias      = null
+            apm_query = [{
+              compute = {}
+              group_by = [{
+                facet = null
+                limit = null
+                sort  = {}
+              }]
+              index  = null
+              search = {}
+            }]
+            conditional_formats = [{
+              comparator      = null
+              custom_bg_color = null
+              custom_fg_color = null
+              hide_value      = null
+              image_url       = null
+              palette         = null
+              timeframe       = null
+              value           = null
+            }]
+            limit = null
+            log_query = [{
+              compute = {}
+              group_by = [{
+                facet = null
+                limit = null
+                sort  = {}
+              }]
+              index  = null
+              search = {}
+            }]
+            order = null
+            process_query = [{
+              filter_by = []
+              limit     = null
+              metric    = null
+              search_by = null
+            }]
+            q = null
+          }]
+          time        = {}
+          title       = null
+          title_align = null
+          title_size  = null
         }]
         query_value_definition = [{
           autoscale   = null
@@ -846,16 +905,18 @@ module "datadog_dashboard" {
       title_size  = null
     }]
     manage_status_definition = [{
-      color_preference = null
-      count            = null
-      display_format   = null
-      hide_zero_counts = null
-      query            = null
-      sort             = null
-      start            = null
-      title            = null
-      title_align      = null
-      title_size       = null
+      color_preference    = null
+      count               = null
+      display_format      = null
+      hide_zero_counts    = null
+      query               = null
+      show_last_triggered = null
+      sort                = null
+      start               = null
+      summary_type        = null
+      title               = null
+      title_align         = null
+      title_size          = null
     }]
     note_definition = [{
       background_color = null
@@ -865,6 +926,55 @@ module "datadog_dashboard" {
       text_align       = null
       tick_edge        = null
       tick_pos         = null
+    }]
+    query_table_definition = [{
+      request = [{
+        aggregator = null
+        alias      = null
+        apm_query = [{
+          compute = {}
+          group_by = [{
+            facet = null
+            limit = null
+            sort  = {}
+          }]
+          index  = null
+          search = {}
+        }]
+        conditional_formats = [{
+          comparator      = null
+          custom_bg_color = null
+          custom_fg_color = null
+          hide_value      = null
+          image_url       = null
+          palette         = null
+          timeframe       = null
+          value           = null
+        }]
+        limit = null
+        log_query = [{
+          compute = {}
+          group_by = [{
+            facet = null
+            limit = null
+            sort  = {}
+          }]
+          index  = null
+          search = {}
+        }]
+        order = null
+        process_query = [{
+          filter_by = []
+          limit     = null
+          metric    = null
+          search_by = null
+        }]
+        q = null
+      }]
+      time        = {}
+      title       = null
+      title_align = null
+      title_size  = null
     }]
     query_value_definition = [{
       autoscale   = null

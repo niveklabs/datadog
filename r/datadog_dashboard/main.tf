@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    datadog = ">= 2.6.0"
+    datadog = ">= 2.7.0"
   }
 }
 
@@ -17,6 +17,22 @@ resource "datadog_dashboard" "this" {
       default = template_variable.value["default"]
       name    = template_variable.value["name"]
       prefix  = template_variable.value["prefix"]
+    }
+  }
+
+  dynamic "template_variable_preset" {
+    for_each = var.template_variable_preset
+    content {
+      name = template_variable_preset.value["name"]
+
+      dynamic "template_variable" {
+        for_each = template_variable_preset.value.template_variable
+        content {
+          name  = template_variable.value["name"]
+          value = template_variable.value["value"]
+        }
+      }
+
     }
   }
 
@@ -737,16 +753,18 @@ resource "datadog_dashboard" "this" {
               dynamic "manage_status_definition" {
                 for_each = widget.value.manage_status_definition
                 content {
-                  color_preference = manage_status_definition.value["color_preference"]
-                  count            = manage_status_definition.value["count"]
-                  display_format   = manage_status_definition.value["display_format"]
-                  hide_zero_counts = manage_status_definition.value["hide_zero_counts"]
-                  query            = manage_status_definition.value["query"]
-                  sort             = manage_status_definition.value["sort"]
-                  start            = manage_status_definition.value["start"]
-                  title            = manage_status_definition.value["title"]
-                  title_align      = manage_status_definition.value["title_align"]
-                  title_size       = manage_status_definition.value["title_size"]
+                  color_preference    = manage_status_definition.value["color_preference"]
+                  count               = manage_status_definition.value["count"]
+                  display_format      = manage_status_definition.value["display_format"]
+                  hide_zero_counts    = manage_status_definition.value["hide_zero_counts"]
+                  query               = manage_status_definition.value["query"]
+                  show_last_triggered = manage_status_definition.value["show_last_triggered"]
+                  sort                = manage_status_definition.value["sort"]
+                  start               = manage_status_definition.value["start"]
+                  summary_type        = manage_status_definition.value["summary_type"]
+                  title               = manage_status_definition.value["title"]
+                  title_align         = manage_status_definition.value["title_align"]
+                  title_size          = manage_status_definition.value["title_size"]
                 }
               }
 
@@ -760,6 +778,91 @@ resource "datadog_dashboard" "this" {
                   text_align       = note_definition.value["text_align"]
                   tick_edge        = note_definition.value["tick_edge"]
                   tick_pos         = note_definition.value["tick_pos"]
+                }
+              }
+
+              dynamic "query_table_definition" {
+                for_each = widget.value.query_table_definition
+                content {
+                  time        = query_table_definition.value["time"]
+                  title       = query_table_definition.value["title"]
+                  title_align = query_table_definition.value["title_align"]
+                  title_size  = query_table_definition.value["title_size"]
+
+                  dynamic "request" {
+                    for_each = query_table_definition.value.request
+                    content {
+                      aggregator = request.value["aggregator"]
+                      alias      = request.value["alias"]
+                      limit      = request.value["limit"]
+                      order      = request.value["order"]
+                      q          = request.value["q"]
+
+                      dynamic "apm_query" {
+                        for_each = request.value.apm_query
+                        content {
+                          compute = apm_query.value["compute"]
+                          index   = apm_query.value["index"]
+                          search  = apm_query.value["search"]
+
+                          dynamic "group_by" {
+                            for_each = apm_query.value.group_by
+                            content {
+                              facet = group_by.value["facet"]
+                              limit = group_by.value["limit"]
+                              sort  = group_by.value["sort"]
+                            }
+                          }
+
+                        }
+                      }
+
+                      dynamic "conditional_formats" {
+                        for_each = request.value.conditional_formats
+                        content {
+                          comparator      = conditional_formats.value["comparator"]
+                          custom_bg_color = conditional_formats.value["custom_bg_color"]
+                          custom_fg_color = conditional_formats.value["custom_fg_color"]
+                          hide_value      = conditional_formats.value["hide_value"]
+                          image_url       = conditional_formats.value["image_url"]
+                          palette         = conditional_formats.value["palette"]
+                          timeframe       = conditional_formats.value["timeframe"]
+                          value           = conditional_formats.value["value"]
+                        }
+                      }
+
+                      dynamic "log_query" {
+                        for_each = request.value.log_query
+                        content {
+                          compute = log_query.value["compute"]
+                          index   = log_query.value["index"]
+                          search  = log_query.value["search"]
+
+                          dynamic "group_by" {
+                            for_each = log_query.value.group_by
+                            content {
+                              facet = group_by.value["facet"]
+                              limit = group_by.value["limit"]
+                              sort  = group_by.value["sort"]
+                            }
+                          }
+
+                        }
+                      }
+
+                      dynamic "process_query" {
+                        for_each = request.value.process_query
+                        content {
+                          filter_by = process_query.value["filter_by"]
+                          limit     = process_query.value["limit"]
+                          metric    = process_query.value["metric"]
+                          search_by = process_query.value["search_by"]
+                        }
+                      }
+
+                    }
+                  }
+
                 }
               }
 
@@ -1508,16 +1611,18 @@ resource "datadog_dashboard" "this" {
       dynamic "manage_status_definition" {
         for_each = widget.value.manage_status_definition
         content {
-          color_preference = manage_status_definition.value["color_preference"]
-          count            = manage_status_definition.value["count"]
-          display_format   = manage_status_definition.value["display_format"]
-          hide_zero_counts = manage_status_definition.value["hide_zero_counts"]
-          query            = manage_status_definition.value["query"]
-          sort             = manage_status_definition.value["sort"]
-          start            = manage_status_definition.value["start"]
-          title            = manage_status_definition.value["title"]
-          title_align      = manage_status_definition.value["title_align"]
-          title_size       = manage_status_definition.value["title_size"]
+          color_preference    = manage_status_definition.value["color_preference"]
+          count               = manage_status_definition.value["count"]
+          display_format      = manage_status_definition.value["display_format"]
+          hide_zero_counts    = manage_status_definition.value["hide_zero_counts"]
+          query               = manage_status_definition.value["query"]
+          show_last_triggered = manage_status_definition.value["show_last_triggered"]
+          sort                = manage_status_definition.value["sort"]
+          start               = manage_status_definition.value["start"]
+          summary_type        = manage_status_definition.value["summary_type"]
+          title               = manage_status_definition.value["title"]
+          title_align         = manage_status_definition.value["title_align"]
+          title_size          = manage_status_definition.value["title_size"]
         }
       }
 
@@ -1531,6 +1636,91 @@ resource "datadog_dashboard" "this" {
           text_align       = note_definition.value["text_align"]
           tick_edge        = note_definition.value["tick_edge"]
           tick_pos         = note_definition.value["tick_pos"]
+        }
+      }
+
+      dynamic "query_table_definition" {
+        for_each = widget.value.query_table_definition
+        content {
+          time        = query_table_definition.value["time"]
+          title       = query_table_definition.value["title"]
+          title_align = query_table_definition.value["title_align"]
+          title_size  = query_table_definition.value["title_size"]
+
+          dynamic "request" {
+            for_each = query_table_definition.value.request
+            content {
+              aggregator = request.value["aggregator"]
+              alias      = request.value["alias"]
+              limit      = request.value["limit"]
+              order      = request.value["order"]
+              q          = request.value["q"]
+
+              dynamic "apm_query" {
+                for_each = request.value.apm_query
+                content {
+                  compute = apm_query.value["compute"]
+                  index   = apm_query.value["index"]
+                  search  = apm_query.value["search"]
+
+                  dynamic "group_by" {
+                    for_each = apm_query.value.group_by
+                    content {
+                      facet = group_by.value["facet"]
+                      limit = group_by.value["limit"]
+                      sort  = group_by.value["sort"]
+                    }
+                  }
+
+                }
+              }
+
+              dynamic "conditional_formats" {
+                for_each = request.value.conditional_formats
+                content {
+                  comparator      = conditional_formats.value["comparator"]
+                  custom_bg_color = conditional_formats.value["custom_bg_color"]
+                  custom_fg_color = conditional_formats.value["custom_fg_color"]
+                  hide_value      = conditional_formats.value["hide_value"]
+                  image_url       = conditional_formats.value["image_url"]
+                  palette         = conditional_formats.value["palette"]
+                  timeframe       = conditional_formats.value["timeframe"]
+                  value           = conditional_formats.value["value"]
+                }
+              }
+
+              dynamic "log_query" {
+                for_each = request.value.log_query
+                content {
+                  compute = log_query.value["compute"]
+                  index   = log_query.value["index"]
+                  search  = log_query.value["search"]
+
+                  dynamic "group_by" {
+                    for_each = log_query.value.group_by
+                    content {
+                      facet = group_by.value["facet"]
+                      limit = group_by.value["limit"]
+                      sort  = group_by.value["sort"]
+                    }
+                  }
+
+                }
+              }
+
+              dynamic "process_query" {
+                for_each = request.value.process_query
+                content {
+                  filter_by = process_query.value["filter_by"]
+                  limit     = process_query.value["limit"]
+                  metric    = process_query.value["metric"]
+                  search_by = process_query.value["search_by"]
+                }
+              }
+
+            }
+          }
+
         }
       }
 

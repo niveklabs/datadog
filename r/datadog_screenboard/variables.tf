@@ -86,17 +86,19 @@ variable "widget" {
           timeframe = string
         }
       ))
-      service_name    = string
-      service_service = string
-      size_version    = string
-      sizing          = string
-      tags            = list(string)
-      text            = string
-      text_align      = string
-      text_size       = string
-      tick            = bool
-      tick_edge       = string
-      tick_pos        = string
+      service_name        = string
+      service_service     = string
+      show_last_triggered = bool
+      size_version        = string
+      sizing              = string
+      summary_type        = string
+      tags                = list(string)
+      text                = string
+      text_align          = string
+      text_size           = string
+      tick                = bool
+      tick_edge           = string
+      tick_pos            = string
       tile_def = list(object(
         {
           autoscale   = bool

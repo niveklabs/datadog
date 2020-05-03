@@ -1,5 +1,5 @@
 provider "datadog" {
-  version = "2.6.0"
+  version = "2.7.0"
 
   api_key = null
   api_url = null

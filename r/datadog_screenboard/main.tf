@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    datadog = ">= 2.6.0"
+    datadog = ">= 2.7.0"
   }
 }
 
@@ -61,8 +61,10 @@ resource "datadog_screenboard" "this" {
       query                     = widget.value["query"]
       service_name              = widget.value["service_name"]
       service_service           = widget.value["service_service"]
+      show_last_triggered       = widget.value["show_last_triggered"]
       size_version              = widget.value["size_version"]
       sizing                    = widget.value["sizing"]
+      summary_type              = widget.value["summary_type"]
       tags                      = widget.value["tags"]
       text                      = widget.value["text"]
       text_align                = widget.value["text_align"]

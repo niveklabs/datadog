@@ -38,6 +38,22 @@ variable "template_variable" {
   default = []
 }
 
+variable "template_variable_preset" {
+  description = "nested mode: NestingList, min items: 0, max items: 0"
+  type = set(object(
+    {
+      name = string
+      template_variable = list(object(
+        {
+          name  = string
+          value = string
+        }
+      ))
+    }
+  ))
+  default = []
+}
+
 variable "widget" {
   description = "nested mode: NestingList, min items: 1, max items: 0"
   type = set(object(
@@ -583,16 +599,18 @@ variable "widget" {
               ))
               manage_status_definition = list(object(
                 {
-                  color_preference = string
-                  count            = number
-                  display_format   = string
-                  hide_zero_counts = bool
-                  query            = string
-                  sort             = string
-                  start            = number
-                  title            = string
-                  title_align      = string
-                  title_size       = string
+                  color_preference    = string
+                  count               = number
+                  display_format      = string
+                  hide_zero_counts    = bool
+                  query               = string
+                  show_last_triggered = bool
+                  sort                = string
+                  start               = number
+                  summary_type        = string
+                  title               = string
+                  title_align         = string
+                  title_size          = string
                 }
               ))
               note_definition = list(object(
@@ -604,6 +622,71 @@ variable "widget" {
                   text_align       = string
                   tick_edge        = string
                   tick_pos         = string
+                }
+              ))
+              query_table_definition = list(object(
+                {
+                  request = list(object(
+                    {
+                      aggregator = string
+                      alias      = string
+                      apm_query = list(object(
+                        {
+                          compute = map(string)
+                          group_by = list(object(
+                            {
+                              facet = string
+                              limit = number
+                              sort  = map(string)
+                            }
+                          ))
+                          index  = string
+                          search = map(string)
+                        }
+                      ))
+                      conditional_formats = list(object(
+                        {
+                          comparator      = string
+                          custom_bg_color = string
+                          custom_fg_color = string
+                          hide_value      = bool
+                          image_url       = string
+                          palette         = string
+                          timeframe       = string
+                          value           = number
+                        }
+                      ))
+                      limit = number
+                      log_query = list(object(
+                        {
+                          compute = map(string)
+                          group_by = list(object(
+                            {
+                              facet = string
+                              limit = number
+                              sort  = map(string)
+                            }
+                          ))
+                          index  = string
+                          search = map(string)
+                        }
+                      ))
+                      order = string
+                      process_query = list(object(
+                        {
+                          filter_by = list(string)
+                          limit     = number
+                          metric    = string
+                          search_by = string
+                        }
+                      ))
+                      q = string
+                    }
+                  ))
+                  time        = map(string)
+                  title       = string
+                  title_align = string
+                  title_size  = string
                 }
               ))
               query_value_definition = list(object(
@@ -1169,16 +1252,18 @@ variable "widget" {
       ))
       manage_status_definition = list(object(
         {
-          color_preference = string
-          count            = number
-          display_format   = string
-          hide_zero_counts = bool
-          query            = string
-          sort             = string
-          start            = number
-          title            = string
-          title_align      = string
-          title_size       = string
+          color_preference    = string
+          count               = number
+          display_format      = string
+          hide_zero_counts    = bool
+          query               = string
+          show_last_triggered = bool
+          sort                = string
+          start               = number
+          summary_type        = string
+          title               = string
+          title_align         = string
+          title_size          = string
         }
       ))
       note_definition = list(object(
@@ -1190,6 +1275,71 @@ variable "widget" {
           text_align       = string
           tick_edge        = string
           tick_pos         = string
+        }
+      ))
+      query_table_definition = list(object(
+        {
+          request = list(object(
+            {
+              aggregator = string
+              alias      = string
+              apm_query = list(object(
+                {
+                  compute = map(string)
+                  group_by = list(object(
+                    {
+                      facet = string
+                      limit = number
+                      sort  = map(string)
+                    }
+                  ))
+                  index  = string
+                  search = map(string)
+                }
+              ))
+              conditional_formats = list(object(
+                {
+                  comparator      = string
+                  custom_bg_color = string
+                  custom_fg_color = string
+                  hide_value      = bool
+                  image_url       = string
+                  palette         = string
+                  timeframe       = string
+                  value           = number
+                }
+              ))
+              limit = number
+              log_query = list(object(
+                {
+                  compute = map(string)
+                  group_by = list(object(
+                    {
+                      facet = string
+                      limit = number
+                      sort  = map(string)
+                    }
+                  ))
+                  index  = string
+                  search = map(string)
+                }
+              ))
+              order = string
+              process_query = list(object(
+                {
+                  filter_by = list(string)
+                  limit     = number
+                  metric    = string
+                  search_by = string
+                }
+              ))
+              q = string
+            }
+          ))
+          time        = map(string)
+          title       = string
+          title_align = string
+          title_size  = string
         }
       ))
       query_value_definition = list(object(
